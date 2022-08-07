@@ -59,7 +59,9 @@ const checkNationality = async () => {
     const response = await fetch(`${nationalizeApi}${userName.value.toLowerCase()}`);
     const responseJason = await response.json();
     const countryArr = responseJason.country;
-    topTwo.innerText = "Top 2  countries with Probability Below:";
+    if(countryArr!= null) {
+        topTwo.innerText = "Top 2 countries with Probability Below:"
+    }
     headingElement1.innerHTML = `Country: <b>${countryArr[0].country_id}</b>`;
     probHeading1.innerHTML = `Probability: <b>${countryArr[0].probability}</b>`;
 

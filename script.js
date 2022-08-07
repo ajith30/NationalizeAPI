@@ -11,7 +11,7 @@ const inputElement = document.createElement("input");
 inputElement.setAttribute("type", "search");
 inputElement.setAttribute("class", "form-control");
 inputElement.setAttribute("id", "username");
-inputElement.setAttribute("placeholder", "Enter your name");
+inputElement.setAttribute("placeholder", "Enter your name to find your country");
 inputElement.setAttribute("required","");
 
 
@@ -41,11 +41,10 @@ document.body.append(divFourElement);
 
 
 const topTwo =  document.createElement("h3");
-topTwo.innerText = "Top 2  countries with Probability Below:";
-const headingElement1 = document.createElement("h3");
-const probHeading1 = document.createElement("h3");
-const headingElement2 = document.createElement("h3");
-const probHeading2 = document.createElement("h3");
+const headingElement1 = document.createElement("p");
+const probHeading1 = document.createElement("p");
+const headingElement2 = document.createElement("p");
+const probHeading2 = document.createElement("p");
 
 divOneElement.append(topTwo,headingElement1,probHeading1, headingElement2, probHeading2);
 
@@ -60,12 +59,12 @@ const checkNationality = async () => {
     const response = await fetch(`${nationalizeApi}${userName.value.toLowerCase()}`);
     const responseJason = await response.json();
     const countryArr = responseJason.country;
+    topTwo.innerText = "Top 2  countries with Probability Below:";
+    headingElement1.innerHTML = `Country: <b>${countryArr[0].country_id}</b>`;
+    probHeading1.innerHTML = `Probability: <b>${countryArr[0].probability}</b>`;
 
-    headingElement1.innerHTML = `Country: ${countryArr[0].country_id}`;
-    probHeading1.innerHTML = `Probability: ${countryArr[0].probability}`;
-
-    headingElement2.innerHTML = `Country: ${countryArr[1].country_id}`;
-    probHeading2.innerHTML = `Probability: ${countryArr[1].probability}`;
+    headingElement2.innerHTML = `Country: <b>${countryArr[1].country_id}</b>`;
+    probHeading2.innerHTML = `Probability: <b>${countryArr[1].probability}</b>`;
 
     console.log(responseJason);
     console.log(countryArr[0].country_id);
